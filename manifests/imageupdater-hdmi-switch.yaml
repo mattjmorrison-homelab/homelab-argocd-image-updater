@@ -1,0 +1,20 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: homelab-hdmi-switch
+  namespace: argocd
+spec:
+  writeBackConfig:
+    method: "argocd"
+  applicationRefs:
+    - namePattern: "homelab-hdmi-switch"
+      images:
+        - alias: "hdmi-switch"
+          imageName: "registry.morrisons.site/homelab-hdmi-switch:v0.0.0"
+          commonUpdateSettings:
+            updateStrategy: "latest"
+            pullSecret: "secret:argocd/argocd-image-updater-zot-creds#creds"
+          manifestTargets:
+            helm:
+              name: "image.repository"
+              tag: "image.tag"
