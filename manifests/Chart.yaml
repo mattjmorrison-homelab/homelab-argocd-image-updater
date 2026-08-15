@@ -1,0 +1,5 @@
+apiVersion: v2
+name: homelab-argocd-image-updater
+description: Argo CD Image Updater controller and CRD
+version: 0.1.0
+appVersion: "v1.3.0"

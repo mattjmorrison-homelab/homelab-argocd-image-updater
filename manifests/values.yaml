@@ -1,0 +1,3 @@
+image:
+  repository: quay.io/argoprojlabs/argocd-image-updater
+  tag: v1.3.0

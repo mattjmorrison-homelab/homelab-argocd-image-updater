@@ -13,11 +13,11 @@ data:
       api_url: https://registry.morrisons.site
       credentials: secret:argocd/argocd-image-updater-zot-creds#creds
   git.commit-message-template: |
-    build: automatic update of {{ .AppName }}
+    build: automatic update of {{ "{{" }} .AppName {{ "}}" }}
 
-    {{ range .AppChanges -}}
-    updates image {{ .Image }} tag '{{ .OldTag }}' to '{{ .NewTag }}'
-    {{ end -}}
+    {{ "{{" }} range .AppChanges -{{ "}}" }}
+    updates image {{ "{{" }} .Image {{ "}}" }} tag '{{ "{{" }} .OldTag {{ "}}" }}' to '{{ "{{" }} .NewTag {{ "}}" }}'
+    {{ "{{" }} end -{{ "}}" }}
 ---
 apiVersion: v1
 kind: ConfigMap
