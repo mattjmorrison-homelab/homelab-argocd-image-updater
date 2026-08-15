@@ -12,9 +12,5 @@ spec:
     port: 8443
     protocol: TCP
     targetPort: 8443
-  - name: healthz
-    port: 8081
-    protocol: TCP
-    targetPort: 8081
   selector:
     control-plane: argocd-image-updater-controller
