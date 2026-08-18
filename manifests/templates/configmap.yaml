@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/part-of: argocd-image-updater-controller
   name: argocd-image-updater-config
 data:
+  log.level: debug
+  kube.events: "true"
   registries.conf: |
     registries:
     - name: Homelab Zot
