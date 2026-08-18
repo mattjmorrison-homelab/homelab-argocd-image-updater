@@ -7,14 +7,23 @@ spec:
   writeBackConfig:
     method: "argocd"
   applicationRefs:
-    - namePattern: "homelab-hdmi-switch"
+    - namePattern: "k8s-hdmi-switch"
       images:
-        - alias: "hdmi-switch"
+        - alias: "hdmi-switch-backend"
           imageName: "registry.morrisons.site/homelab-hdmi-switch:v0.0.0"
           commonUpdateSettings:
             updateStrategy: "latest"
             pullSecret: "secret:argocd/argocd-image-updater-zot-creds#creds"
           manifestTargets:
             helm:
-              name: "image.repository"
-              tag: "image.tag"
+              name: "backend.image.repository"
+              tag: "backend.image.tag"
+        - alias: "hdmi-switch-ui"
+          imageName: "registry.morrisons.site/ui-hdmi-switch:v0.0.0"
+          commonUpdateSettings:
+            updateStrategy: "latest"
+            pullSecret: "secret:argocd/argocd-image-updater-zot-creds#creds"
+          manifestTargets:
+            helm:
+              name: "ui.image.repository"
+              tag: "ui.image.tag"
