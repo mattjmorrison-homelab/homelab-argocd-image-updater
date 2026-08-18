@@ -10,7 +10,7 @@ spec:
     - namePattern: "k8s-hdmi-switch"
       images:
         - alias: "hdmi-switch-backend"
-          imageName: "registry.morrisons.site/homelab-hdmi-switch:v0.0.0"
+          imageName: "registry.morrisons.site/graph-hdmi-switch:v0.0.0"
           commonUpdateSettings:
             updateStrategy: "latest"
             pullSecret: "secret:argocd/argocd-image-updater-zot-creds#creds"
