@@ -14,6 +14,13 @@ spec:
           commonUpdateSettings:
             updateStrategy: "latest"
             pullSecret: "secret:argocd/argocd-image-updater-zot-creds#creds"
+            # This image is built arm64-only (deployed to pi5-8), not a
+            # multi-arch manifest. Image Updater defaults to querying
+            # linux/amd64 and silently ignores anything else, finding "no
+            # tags" for an image that's actually pushing fine — this is
+            # what tells it to look for the real platform instead.
+            platforms:
+              - "linux/arm64"
           manifestTargets:
             helm:
               name: "backend.image.repository"
