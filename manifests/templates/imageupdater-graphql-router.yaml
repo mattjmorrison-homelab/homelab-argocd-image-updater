@@ -1,0 +1,20 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: k8s-graphql-router
+  namespace: argocd
+spec:
+  writeBackConfig:
+    method: "argocd"
+  applicationRefs:
+    - namePattern: "k8s-graphql-router"
+      images:
+        - alias: "graphql-router"
+          imageName: "registry.morrisons.site/graph-router:v0.0.0"
+          commonUpdateSettings:
+            updateStrategy: "latest"
+            pullSecret: "secret:argocd/argocd-image-updater-zot-creds#creds"
+          manifestTargets:
+            helm:
+              name: "image.repository"
+              tag: "image.tag"
