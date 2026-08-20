@@ -10,9 +10,16 @@ spec:
     - namePattern: "k8s-graphql-router"
       images:
         - alias: "graphql-router"
-          imageName: "registry.morrisons.site/graph-router:v0.0.0"
+          # Pinned to the "latest" tag with "digest" strategy, not "latest"
+          # (newest-tag) strategy like the other apps here — this image's
+          # content depends on the backend's live schema at build time, so
+          # rebuilding the same graph-router commit still needs to redeploy
+          # if the backend changed. digest strategy detects that under a
+          # reused tag; newest-tag strategy can't (confirmed: it silently
+          # missed a real content change and left a stale pod running).
+          imageName: "registry.morrisons.site/graph-router:latest"
           commonUpdateSettings:
-            updateStrategy: "latest"
+            updateStrategy: "digest"
             pullSecret: "secret:argocd/argocd-image-updater-zot-creds#creds"
           manifestTargets:
             helm:
